@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const axios = Axios.create({
+const api = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL, //eslint-disable-line
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
@@ -8,4 +8,4 @@ const axios = Axios.create({
   withCredentials: true,
 });
 
-export default axios;
+export default api;
