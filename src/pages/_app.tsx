@@ -1,8 +1,26 @@
+import { QueryClient, QueryClientProvider } from "react-query";
+
 import type { AppProps } from 'next/app';
+
 import 'tailwindcss/tailwind.css';
 import '@/styles/app.css';
+
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false
+      },
+      mutations: {
+        retry: false
+      }
+    }
+  });
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Component {...pageProps} />
+    </QueryClientProvider>
+  );
 }
 
 export default MyApp;
