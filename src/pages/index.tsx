@@ -6,7 +6,6 @@ import TaskItem from "@/components/task/TaskItem";
 import { useTasks } from "@/lib/queries/taskQuery";
 import { useCreateTask } from '@/lib/queries/taskQuery';
 
-
 const Home: React.VFC = (): JSX.Element => {
 
   const { data: tasks, status } = useTasks();
