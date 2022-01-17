@@ -15,7 +15,16 @@ const updateDoneTask = async ({ id, is_done }: TASK) => {
   return data;
 };
 
+const createTask = async (title: string) => {
+  const { data } = await api.post<TASK>(
+    'api/tasks',
+    { title: title }
+  );
+  return data;
+};
+
 export {
   getTask,
-  updateDoneTask
+  updateDoneTask,
+  createTask
 };
