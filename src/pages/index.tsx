@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '@/components/common/Layout';
+import TaskItem from "@/components/task/TaskItem";
 import { useTasks } from "@/lib/queries/taskQuery";
-import { useUpdateDoneTask, useCreateTask } from '@/lib/queries/taskQuery';
+import { useCreateTask } from '@/lib/queries/taskQuery';
+
+
 const Home: React.VFC = (): JSX.Element => {
 
   const { data: tasks, status } = useTasks();
-  const updateDoneTask = useUpdateDoneTask();
   const [title, setTitle] = useState('');
   const createTask = useCreateTask();
 
@@ -42,13 +44,7 @@ const Home: React.VFC = (): JSX.Element => {
         <ul className="task-list">
           {
             tasks.map(task => (
-              <li key={task.id} className={task.is_done ? 'done' : ''}>
-                <label className="checkbox-label">
-                  <input type="checkbox" className="checkbox-input" onClick={() => updateDoneTask.mutate(task)} />
-                </label>
-                <div><span>{task.title}</span></div>
-                <button className="btn is-delete">削除</button>
-              </li>
+              <TaskItem key={task.id} task={task} />
             ))
           }
         </ul>

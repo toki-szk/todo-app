@@ -23,8 +23,27 @@ const createTask = async (title: string) => {
   return data;
 };
 
+const updateTask = async ({ id, task }: { id: number, task: TASK }) => {
+  const { data } = await api.patch<TASK>(
+    `api/tasks/${id}`,
+    task
+  );
+  return data;
+};
+
+const deleteTask = async (id: number) => {
+  const { data } = await api.delete<TASK>(
+    `api/tasks/${id}`,
+  );
+
+  return data;
+};
+
+
 export {
   getTask,
   updateDoneTask,
-  createTask
+  createTask,
+  updateTask,
+  deleteTask
 };
