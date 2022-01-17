@@ -1,11 +1,13 @@
 import React from 'react';
 
+import 'react-toastify/dist/ReactToastify.css';
 import Layout from '@/components/common/Layout';
-import { useTasks } from "@/lib/queries/task-query";
-
+import { useTasks } from "@/lib/queries/taskQuery";
+import { useUpdateDoneTask } from '@/lib/queries/taskQuery';
 const Home: React.VFC = (): JSX.Element => {
 
   const { data: tasks, status } = useTasks();
+  const updateDoneTask = useUpdateDoneTask();
 
   if (status === 'loading') {
     return <div className="loader" />;
@@ -27,9 +29,9 @@ const Home: React.VFC = (): JSX.Element => {
         <ul className="task-list">
           {
             tasks.map(task => (
-              <li key={task.id}>
+              <li key={task.id} className={task.is_done ? 'done' : ''}>
                 <label className="checkbox-label">
-                  <input type="checkbox" className="checkbox-input" />
+                  <input type="checkbox" className="checkbox-input" onClick={() => updateDoneTask.mutate(task)} />
                 </label>
                 <div><span>{task.title}</span></div>
                 <button className="btn is-delete">削除</button>
